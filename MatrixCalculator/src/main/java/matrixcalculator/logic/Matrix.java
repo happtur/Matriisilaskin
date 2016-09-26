@@ -12,6 +12,7 @@ public class Matrix {
     //static createIdentityMatrix(int n)
     //compare
     //alkeisrivitoimitukset? with variation from element x to element y
+    //atm doesn't really use numberOfColumns, if permanent, change this
     private double[][] rows;
     private int numberOfColumns;
 
@@ -105,6 +106,148 @@ public class Matrix {
      */
     public double[] getColumn(int columnNumber) {
         return new double[0];
+    }
+    
+    private double[] getPartOfRow(int rowNumber, int columnStart, int columnEnd) {
+        double[] wholeRow = this.rows[rowNumber - 1];
+        double[] part = new double[columnEnd - columnStart + 1];
+        
+        for(int i = 0; i <= columnEnd - columnStart; i++) {
+            part[i] = wholeRow[columnStart + i - 1];
+        }
+        
+        return part;
+    }
+
+    /**
+     * Returns the submatrix in the upper left quarter of this matrix. Only works with (2k)x(2k)-matrices
+     * 
+     * @return the upper left corner as a matrix
+     */
+        public Matrix getUpperLeftQuarter() {
+        return this.getSubmatrix(1, this.getNumberOfRows()/2, 1, this.getNumberOfColumns()/2);
+    }
+    
+    /**
+     * Returns the submatrix in the upper right quarter of this matrix. Only works with (2k)x(2k)-matrices
+     *
+     * @return the upper right corner as a matrix
+     */
+    public Matrix getUpperRightQuarter() {
+        return this.getSubmatrix(1, this.getNumberOfRows()/2, this.getNumberOfColumns()/2 + 1, this.getNumberOfColumns());
+    }
+    
+    /**
+     * Returns the submatrix in the lower left quarter of this matrix. Only works with (2k)x(2k)-matrices
+     *
+     * @return the lower left corner as a matrix
+     */
+    public Matrix getLowerLeftQuarter() {
+        return this.getSubmatrix(this.getNumberOfRows()/2 + 1, this.getNumberOfRows(), 1, this.getNumberOfColumns()/2);
+    }
+    
+    /**
+     * Returns the submatrix in the lower right quarter of this matrix. Only works with (2k)x(2k)-matrices
+     *
+     * @return the lower right corner as a matrix
+     */
+    public Matrix getLowerRightQuarter() {
+        return this.getSubmatrix(this.getNumberOfRows()/2 + 1, this.getNumberOfRows(), this.getNumberOfColumns()/2 + 1, this.getNumberOfColumns());
+    }
+    
+    //no check for rowStart < rowEnd
+    /**
+     * Returns the submatrix defined by the function's parameters. The rows and columns are numbered beginning with 1
+     *
+     * @param rowStart the number of the first row that is to be included in the resulting matrix
+     * @param rowEnd the number of the last row that is to be included in the resulting matrix 
+     * @param columnStart the number of the first column that is to be included in the resulting matrix
+     * @param columnEnd the number of the last column that is to be included in the resulting matrix 
+     * @return the resulting matrix
+     */
+        public Matrix getSubmatrix(int rowStart, int rowEnd, int columnStart, int columnEnd) {
+        Matrix part = new Matrix(rowEnd - rowStart + 1, columnEnd - columnStart + 1);
+        
+        for(int i = 0; i <= rowEnd - rowStart; i++) {
+            double[] newRow = this.getPartOfRow(rowStart + i, columnStart, columnEnd);
+            part.setRow(i + 1, newRow);
+        }
+        
+        return part;
+    }
+    
+    //doesn't check if filledSize is smaller than "this"
+    /**
+     * The function returns a square matrix in the requested size, with the elements 
+     * of the original matrix in its upper left corner, and sets the value of the 
+     * rest of the elements to zero.
+     *
+     * @param filledSize the number of rows and columns in the resulting matrix
+     * @return the filled matrix
+     */
+    public Matrix getFilledMatrix(int filledSize) {
+        Matrix filledMatrix = new Matrix(filledSize, filledSize);
+        for(int i = 1; i <= this.getNumberOfRows(); i++) {
+            filledMatrix.setFilledRow(i, this.getRow(i));
+        }
+        
+        return filledMatrix;
+    }
+    
+    private void setFilledRow(int rowNumber, double[] rowValues) {
+        if(rowValues.length == this.getNumberOfColumns()) {
+            this.setRow(rowNumber, rowValues);
+        } else {
+            double[] rowToBeSet = this.rows[rowNumber - 1];
+            for(int i = 0; i < rowValues.length; i++) {
+                rowToBeSet[i] = rowValues[i];            }
+        }
+    }
+    
+    //assumes that all submatrices are square matrices of the same size
+    /**
+     * Combines four matrices into one matrix.
+     *
+     * @param upperLeft the upper left quarter of the resulting matrix
+     * @param upperRight the upper right quarter of the resulting matrix
+     * @param lowerLeft the lower left quarter of the resulting matrix
+     * @param lowerRight the lower right quarter of the resulting matrix
+     */
+    public void setMatrix(Matrix upperLeft, Matrix upperRight, Matrix lowerLeft, Matrix lowerRight) {        
+        int halfSize = upperRight.getNumberOfRows();
+        
+        for(int i = 1; i <= halfSize; i++) {
+            double[] rowValues = new double[2 * halfSize];
+            System.arraycopy(upperLeft.getRow(i), 0, rowValues, 0, halfSize);
+            System.arraycopy(upperRight.getRow(i), 0, rowValues, halfSize, halfSize);
+            
+            this.setRow(i, rowValues);
+        }
+        
+        for(int i = 1; i <= halfSize; i++) {
+            double[] rowValues = new double[2 * halfSize];
+            System.arraycopy(lowerLeft.getRow(i), 0, rowValues, 0, halfSize);
+            System.arraycopy(lowerRight.getRow(i), 0, rowValues, halfSize, halfSize);
+            
+            this.setRow(halfSize + i, rowValues);
+        }
+    }
+    
+    /**
+     * Checks if the matrix is a null matrix, ie all its elements have the value zero.
+     *
+     * @return boolean of "this is a null matrix"
+     */
+    public boolean isNullMatrix() {
+        for(double[] row : this.rows) {
+            for(double element : row) {
+                if(element != 0) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package matrixcalculator.logic;
 
-import calculators.AdditionCalculator;
-import calculators.ScalarMultiplicationCalculator;
+import calculators.*;
 import ui.TextUI;
 
 /**
@@ -18,9 +17,6 @@ public class Main {
     public static void main(String[] args) {
         TextUI ui = new TextUI();
 
-        Matrix m = new Matrix(-1, 0);
-        System.out.println(m);
-
         System.out.println("ADDITION");
         AdditionCalculator ac = ui.initiateAddition(false);
         ac.calculate();
@@ -35,6 +31,29 @@ public class Main {
         ScalarMultiplicationCalculator smc = ui.initiateScalarMultiplication();
         smc.calculate();
         System.out.println(smc);
+        
+        System.out.println("TRACE");
+        TraceCalculator tc = ui.initiateTraceCalculator();
+        tc.calculate();
+        System.out.println(tc);
+        
+        System.out.println("QUARTERS");
+        Matrix matrixA = ui.initiateQuarters();
+        System.out.println("UPPER LEFT\n" + matrixA.getUpperLeftQuarter());
+        System.out.println("UPPER RIGHT\n" + matrixA.getUpperRightQuarter());
+        System.out.println("LOWER LEFT\n" + matrixA.getLowerLeftQuarter());
+        System.out.println("LOWER RIGHT\n" + matrixA.getLowerRightQuarter());
+        
+        System.out.println("FILLING");
+        Matrix matrixB = ui.initiateFilling();
+        int filledSize = (int) Math.pow(2, Math.ceil(Math.log(Math.max(matrixB.getNumberOfRows(), matrixB.getNumberOfColumns()))/Math.log(2)));
+        System.out.println(matrixB.getFilledMatrix(filledSize));
+        
+        System.out.println("MATRIX MULTIPLICATION");
+        ProductCalculator pc = ui.initiateMatrixMultiplication();
+        pc.calculate();
+        System.out.println(pc);
+        
     }
 
 }

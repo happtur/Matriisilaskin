@@ -13,6 +13,6 @@
  doublen nolla voi olla negatiivinen.
 - Asiat jotka ovat vielä hieman epäselviä, hämäriä tai vaikeita tulevat luultavasti
  selvemmäksi seuraavina viikkoina kun ehdin tutustua niihin vielä paremmin ja "leikkiä"
- niiden kanssa (esim. determinantin laskemisen algoritmin toteutus).
+ niillä (esim. determinantin laskemisen algoritmin toteutus).
 - Seuraavaksi luen enemmän double- ja sen kaltaisista tyypistä, toteutan 'jälki-laskinta' ja yritän toteuttaa jokin
  vaikeimmista 'laskimista' (matriisitulo ?).  

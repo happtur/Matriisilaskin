@@ -61,6 +61,55 @@ public class TextUI {
         return new ScalarMultiplicationCalculator(matrix, scalar);
     }
     
+    /**
+     * Asks for the components needed for trace calculation from the user,
+     *  returns a TraceCalculator with these components. The needed components
+     *  are a square matrix, the user decides the size
+     *
+     * @return the set up calculator
+     */
+    public TraceCalculator initiateTraceCalculator() {
+        int n = this.askSize(0);
+        Matrix matrix = this.readMatrix(n, n);
+        
+        return new TraceCalculator(matrix);
+    }
+    
+    //temporary function
+    public Matrix initiateQuarters() {
+        int n = this.askSize(0);
+        return this.readMatrix(n, n);
+    }
+    
+    //temporary function
+    public Matrix initiateFilling() {
+        int m = this.askSize(0);
+        int n = this.askSize(1);
+        
+        return this.readMatrix(m, n);
+    }
+    
+    /**
+     * Asks for the components needed for calculating the product of two matrices
+     * from the user, returns a TraceCalculator with these components.
+     * The needed components are a m x n-matrix and a n x p-matrix, the user
+     * decides the sizes
+     *
+     * @return the set up calculator
+     */
+    public ProductCalculator initiateMatrixMultiplication() {
+        System.out.println("First matrix:\n");
+        int m = this.askSize(0);
+        int n = this.askSize(1);
+        Matrix matrixA = this.readMatrix(m, n);
+        
+        System.out.println("Second matrix:\n");
+        int p = this.askSize(1);
+        Matrix matrixB = this.readMatrix(n, p);
+        
+        return new ProductCalculator(matrixA, matrixB);
+    }
+    
     private int askSize(int rowsOrColumns) {
         String ofThis = "columns";
         if (rowsOrColumns == 0) {

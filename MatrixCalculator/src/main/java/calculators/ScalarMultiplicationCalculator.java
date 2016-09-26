@@ -48,6 +48,6 @@ public class ScalarMultiplicationCalculator {
 
     @Override
     public String toString() {
-        return "" + scalar + "\n" + matrix + "\n" + result + "\n";
+        return "" + scalar + "\n\n" + matrix + "\n" + result + "\n";
     }
 }

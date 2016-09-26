@@ -41,7 +41,7 @@ public class ProductCalculator {
         if (aRows != aColumns
                 || aRows != bRows
                 || bRows != bColumns
-                || aRows == Math.round(Math.log(aRows) / Math.log(2))) {
+                || Math.log(aRows) / Math.log(2) != Math.round(Math.log(aRows) / Math.log(2))) {
 
             int biggestSize = Math.max(aRows,
                     Math.max(aColumns,
@@ -57,7 +57,7 @@ public class ProductCalculator {
             result.setValue(1, 1, matrixA.getValue(1, 1) * matrixB.getValue(1, 1));            
             return result;
         }
-
+        
         Matrix m1 = this.M1();
         Matrix m2 = this.M2();
         Matrix m3 = this.M3();

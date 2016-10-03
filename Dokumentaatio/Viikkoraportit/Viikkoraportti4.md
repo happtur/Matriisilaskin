@@ -1,7 +1,7 @@
 ###Viikkoraportti 4
 ######Tuntimäärä: 1.5h
 
-- Tällä viikolla poistin virheen matriisitulolaskimesta ja kirjoitin
+- Tällä viikolla poistin virheen matriisitulolaskimesta ja
  paransin tilapäistä käyttäjäliittymää.
 - En ole aloittanut suorituskykytestausta enkä myöskään testausdokumentin
  kirjoittamista

@@ -9,8 +9,7 @@ import ui.TextUI;
 public class Main {
 
     /**
-     * the main-function conducts the available matrix-calculations one by one
-     * at the moment.
+     * sets everything in motion.
      *
      * @param args
      */

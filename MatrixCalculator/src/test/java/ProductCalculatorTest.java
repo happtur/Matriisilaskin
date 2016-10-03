@@ -133,6 +133,8 @@ public class ProductCalculatorTest {
         
     }
     
+    //test nxn where n != 2^k, nxn where n == 2^k and mxn nxp
+    
     @Test
     public void toStringReturnsTheDesiredString() {
         ProductCalculator pc = new ProductCalculator(matrixA, nullMatrix);

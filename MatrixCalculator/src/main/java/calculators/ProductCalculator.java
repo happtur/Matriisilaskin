@@ -32,7 +32,7 @@ public class ProductCalculator {
      *
      * @return the resulting matrix
      */
-        public Matrix calculate() {
+    public Matrix calculate() {
         int aRows = matrixA.getNumberOfRows();
         int aColumns = matrixA.getNumberOfColumns();
         int bRows = matrixB.getNumberOfRows();

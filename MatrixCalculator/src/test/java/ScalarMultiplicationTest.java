@@ -89,6 +89,6 @@ public class ScalarMultiplicationTest {
         ScalarMultiplicationCalculator smc = new ScalarMultiplicationCalculator(simpleMatrix, 2);
         smc.calculate();
 
-        assertEquals("2.0\n1.0, \n\n2.0, \n\n", smc.toString());
+        assertEquals("2.0\n\n1.0, \n\n2.0, \n\n", smc.toString());
     }
 }
